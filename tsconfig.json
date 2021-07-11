@@ -13,6 +13,9 @@
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "noEmit": true,
-      "skipLibCheck": true
+      "skipLibCheck": true,
+      "paths": {
+        "@assets/*": ["/src/assets"]
+      }
     }
   }
