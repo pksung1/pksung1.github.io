@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import '@assets/styles/index.scss'
+import '@assets/styles/global.scss'
 
 const IndexPage:React.FC = () => {
   return (
