@@ -6,7 +6,7 @@ import Icon from "../../components/Icon"
 const Menu = () => {
 
     return (
-        <div className="hidden sm:flex w-56 justify-center h-screen fixed left-0 bg-violet-900 pt-32">
+        <div className="hidden sm:flex w-40 md:w-56 justify-center h-screen fixed left-0 bg-violet-900 pt-32">
             <div className="mb-30">
                 <div className="flex-col">
                     <Avatar />

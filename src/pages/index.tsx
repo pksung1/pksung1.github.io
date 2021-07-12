@@ -8,7 +8,7 @@ import Card from "../components/Card"
 const IndexPage:React.FC = () => {
   return (
     <MenuWrapper>
-      <div className="flex flex-col flex-1 items-center justify-center h-screen">
+      <div className="flex flex-col flex-1 items-center justify-center h-screen main-bg">
         <div className="w-2/3">
           <h3 className="text-2xl">Hello. I Am</h3>
           <h1 className="text-4xl">FRONTEND DEVELOPER</h1>
@@ -17,11 +17,11 @@ const IndexPage:React.FC = () => {
       <SectionWrapper>
         <SectionTitle title="ABOUT ME"/>
         <SectionContent>
-          <div className="flex-row flex">
-            <div className="w-1/3 h-96 border-violet-600 border-2 rounded-md shadow-sm">
+          <div className="flex-col md:flex-row flex">
+            <div className="md:w-1/3 h-60 sm:h-96 border-violet-600 border-2 rounded-md shadow-sm">
               ImageCard
             </div>
-            <div className="w-2/3 h-52 border-violet-400 border-2 ml-10">
+            <div className="md:w-2/3 border-violet-400 border-2 ml-0 md:ml-10 mt-5 md:mt-0">
               로렘이프섬 내용 뭐쓰징
             </div>
           </div>
@@ -34,9 +34,7 @@ const IndexPage:React.FC = () => {
             <h3 className="text-lg mb-4">Recently Post</h3>
             <div>더보기 &gt;&gt;</div>
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            <Card />
-            <Card />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <Card />
             <Card />
             <Card />
