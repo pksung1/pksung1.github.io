@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "tailwind": "tailwindcss -i ./src/assets/styles/tailwind/config.css -o ./src/assets/styles/tailwind/index.css --watch",
-    "deploy": "gatsby build && gh-pages -d public -b master"
+    "deploy": "gatsby build && gh-pages -d public -b gh-pages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.3",
