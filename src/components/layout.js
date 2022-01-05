@@ -8,27 +8,28 @@ const Layout = ({ location, title, children }) => {
 
   if (isRootPath) {
     header = (
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h1>
+      <div className="flex flex-row justify-between px-4 py-2 border-b border-gray-600 border-solid">
+        <h1 className="text-3xl">
+          <Link to="/">{title}</Link>
+        </h1>
+        <input type="text" className="border w-64 rounded-xl px-2" placeholder="검색" />
+      </div>
     )
   } else {
     header = (
-      <Link className="header-link-home" to="/">
+      <Link className="text-xl" to="/">
         {title}
       </Link>
     )
   }
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
-      <header className="global-header">{header}</header>
-      <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-      </footer>
+    <div className="bg-gray-200" data-is-root-path={isRootPath}>
+      <header>{header}</header>
+      <main className="flex flex-column">
+        <section className="flex"></section>
+        <section className="max-w-2xl">{children}</section></main>
+      <footer></footer>
     </div>
   )
 }
