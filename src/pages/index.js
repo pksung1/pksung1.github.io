@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Link, graphql } from "gatsby"
+import { Link, graphql, navigate } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -24,6 +24,7 @@ const BlogIndex = ({ data, location }) => {
     )
   }
 
+
   return (
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
@@ -36,8 +37,7 @@ const BlogIndex = ({ data, location }) => {
               const title = post.frontmatter.title || post.fields.slug
 
               return (
-                <Link to={post.fields.slug} itemProp="url" className="p-4 transition-shadow border-gray-100 border rounded shadow-sm hover:shadow-lg cursor-pointer">
-                <li key={post.fields.slug}>
+                <li key={post.fields.slug} onClick={() => navigate(post.fields.slug)} className="p-4 transition-shadow border-gray-100 border rounded shadow-sm hover:shadow-lg cursor-pointer">
                   <article
                     className="post-list-item"
                     itemScope
@@ -62,7 +62,6 @@ const BlogIndex = ({ data, location }) => {
                     </section>
                   </article>
                 </li>
-                </Link>
               )
             })}
           </ol>

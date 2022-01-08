@@ -28,6 +28,8 @@
     "gatsby-source-filesystem": "^4.4.0",
     "gatsby-transformer-remark": "^5.4.0",
     "gatsby-transformer-sharp": "^4.4.0",
+    "lodash": "^4.17.21",
+    "pixi.js": "^6.2.1",
     "postcss": "^8.4.5",
     "prismjs": "^1.25.0",
     "react": "^17.0.1",
