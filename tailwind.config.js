@@ -1,9 +1,17 @@
+const SIZE = {
+  HEADER: '3rem'
+}
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      padding: {
+        screen: '100vh'
+      }
+    },
   },
   plugins: [],
 }
