@@ -37,7 +37,7 @@ const BlogIndex = ({ data, location }) => {
               const title = post.frontmatter.title || post.fields.slug
 
               return (
-                <li key={post.fields.slug} onClick={() => navigate(post.fields.slug)} className="p-4 transition-shadow border-gray-100 border rounded shadow-sm hover:shadow-lg cursor-pointer">
+                <li key={post.fields.slug} onClick={() => navigate(`posts${post.fields.slug}`)} className="p-4 transition-shadow border-gray-100 border rounded shadow-sm hover:shadow-lg cursor-pointer">
                   <article
                     className="post-list-item"
                     itemScope
@@ -45,7 +45,7 @@ const BlogIndex = ({ data, location }) => {
                   >
                     <header>
                       <h2 className="text-lg">
-                        <Link to={post.fields.slug} itemProp="url">
+                        <Link to={`posts${post.fields.slug}`} itemProp="url">
                           <span itemProp="headline">{title}</span>
                         </Link>
                       </h2>
