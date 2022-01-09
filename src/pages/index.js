@@ -31,7 +31,7 @@ const BlogIndex = ({ data, location }) => {
       <MainCanvas />
       <div className="pt-screen -mt-8 z-10 relative lg:px-20">
         <div className="bg-white mx-auto rounded-t-3xl p-8 max-h">
-          <h2 className="text-2xl pb-4">Recently Posts</h2>
+          <h2 className="text-2xl pb-4">Recent Posts</h2>
           <ol className="lg:grid grid-rows-3 grid-cols-2 gap-2">
             {posts.slice(0, 6).map(post => {
               const title = post.frontmatter.title || post.fields.slug

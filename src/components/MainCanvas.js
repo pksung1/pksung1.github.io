@@ -9,8 +9,12 @@ class Text {
 
   render () {
     const ctx = this.canvas.getContext('2d');
+    ctx.strokeStyle = `rgb(
+      ${parseInt(Math.random() * 255)},
+      ${parseInt(Math.random() * 255)},
+      ${parseInt(Math.random() * 255)})`;
     const {width, height} = this.options
-    ctx.font = "6rem serif";
+    ctx.font = "6rem 'The Nautigal'";
     const devseonMeasure = ctx.measureText('DEVSEON')
     ctx.strokeText('DEVSEON', (width - devseonMeasure.width) / 2, (height - devseonMeasure.fontBoundingBoxAscent) / 2)
   }
@@ -32,6 +36,7 @@ class Canvas {
 
     this.canvas.width = this.width
     this.canvas.height = this.height
+    this.ctx = this.canvas.getContext('2d')
 
     this.resize = this.resize.bind(this)
     
@@ -41,9 +46,9 @@ class Canvas {
 
   start () {
     this.textCtx = new Text(this.canvas, this.options);
-    this.textCtx.render();
+    
     this.loop = this.loop.bind(this)
-    this.render();
+    this.loop()
   }
 
   resize (e) {
@@ -59,14 +64,15 @@ class Canvas {
   } 
 
   render () {
-
-    this.loop()
+    this.ctx.clearRect(0, 0, this.width, this.height)
+    this.textCtx.render();
   }
 
   loop () {
     requestAnimationFrame(() => {
+      this.render();
       setTimeout(() => {
-        this.loop();
+        this.loop()
       }, this.tick)
     });
   }

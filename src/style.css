@@ -3,10 +3,12 @@
 @tailwind utilities;
 
 
-html {
-  font-size: 20px;
-}
-
+/* 
+ WebFont
+  - The Nautigal  400 700
+  - Noto Sans KR  300 400 700
+*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&family=The+Nautigal:wght@400;700&display=swap');
 
 :root {
   --maxWidth-none: "none";
@@ -35,10 +37,10 @@ html {
   --spacing-20: 5rem;
   --spacing-24: 6rem;
   --spacing-32: 8rem;
-  --fontFamily-sans: Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
+  --fontFamily-sans: 'Noto Sans KR', Montserrat, system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --fontFamily-serif: "Merriweather", "Georgia", Cambria, "Times New Roman",
+  --fontFamily-serif: 'Noto Sans KR', "Merriweather", "Georgia", Cambria, "Times New Roman",
     Times, serif;
   --font-body: var(--fontFamily-serif);
   --font-heading: var(--fontFamily-sans);
@@ -68,6 +70,12 @@ html {
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #d1dce5;
+}
+
+
+html {
+  font-size: 20px;
+  font-family: var(--fontFamily-sans);
 }
 
 /* HTML elements */
