@@ -5,6 +5,13 @@ class Text {
   constructor(canvas, options) {
     this.canvas = canvas
     this.options = options
+
+    this.render = this.render.bind(this)
+    this.resize = this.resize.bind(this)
+  }
+
+  resize (options) {
+    this.options = options;
   }
 
   render () {
@@ -41,14 +48,14 @@ class Canvas {
     this.resize = this.resize.bind(this)
     
     window.addEventListener('resize', _.debounce(this.resize, 300))
+    this.render = _.throttle(this.render.bind(this), 300);
     this.start();
   }
 
   start () {
     this.textCtx = new Text(this.canvas, this.options);
-    
-    this.loop = this.loop.bind(this)
-    this.loop()
+    this.render();
+    // this.loop()
   }
 
   resize (e) {
@@ -61,20 +68,14 @@ class Canvas {
       width: offsetWidth,
       height: offsetHeight
     }
+
+    this.textCtx.resize(this.options)
   } 
 
   render () {
-    this.ctx.clearRect(0, 0, this.width, this.height)
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
     this.textCtx.render();
-  }
-
-  loop () {
-    requestAnimationFrame(() => {
-      this.render();
-      setTimeout(() => {
-        this.loop()
-      }, this.tick)
-    });
+    requestAnimationFrame(this.render)
   }
 
 }
