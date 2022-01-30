@@ -170,10 +170,17 @@ html {
   list-style-image: none;
 }
 
+
+
 #article-body ul li,
 #article-body ol li {
   padding-left: var(--spacing-0);
   margin-bottom: calc(var(--spacing-8) / 2);
+}
+
+#article-body ul li:not(.task-list-item)::before {
+  content: '-';
+  margin-right: var(--spacing-2);
 }
 
 #article-body li > p {

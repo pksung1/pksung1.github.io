@@ -15,7 +15,7 @@ tags: ['계획', 'Blog-Composer']
 기술스택은 아래와 같다.
 
 ## FrontEnd
-- nextjs
+- NextJS
 - SWR
 - AWS Amplify
 
@@ -27,8 +27,8 @@ tags: ['계획', 'Blog-Composer']
 - Docker
 
 ## 기능 요구사항
-### 마크다운 에디터
 
+### 프론트엔드 요구사항
 - [ ] 로그인 페이지
 - [ ] 글 목록보기 페이지
 - [ ] 글 상세보기 페이지

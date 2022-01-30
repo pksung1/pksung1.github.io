@@ -14,13 +14,13 @@ tags: ["gatsby"]
 
 나의 요구사항은 아래와 같았다.
 
-- 리액트같은 SPA로 제작가능
+- 리액트같은 SPA 기능
 - 직접 코드 작성하기 쉬움
 - Markdown으로 글을 쓰고싶음
 - Canvas로 인터렉티브한 화면을 넣을수 있어야함
 - tailwindcss 쓰고싶다
 
-위 네가지 조건을 만족하는게 gatsby였다.
+위 다섯가지 조건을 만족하는게 gatsby였다.
 
 거기에 데이터는 graphql로 제공받을수 있어 내가 원하는 정보만 쿼리를 통해 가져올수도 있다.
 
@@ -56,6 +56,27 @@ https://github.com/gatsbyjs/gatsby-starter-blog
     },
 },
 ```
-
-
 gatsby-node.js 파일이 있는데 여기서 markdown 파일들을 생성한다.
+
+폴더별로 분류해서 게시물을 가져오기 위해 graphql filter를 사용했다.
+
+```graphql
+allMarkdownRemark(
+    sort: { fields: [frontmatter___date], order: DESC },
+    filter: {fileAbsolutePath: {regex: "/\/blog\//"}}
+) {
+    nodes {
+        excerpt
+        fields {
+            slug
+        }
+        frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            description
+            tags
+        }
+    }
+}
+```
+

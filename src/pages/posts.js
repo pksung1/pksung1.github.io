@@ -21,21 +21,23 @@ const Posts = ({location, data}) => {
   return (
     <Layout location={location} title={siteTitle}>
       <div className='w-10/12 m-auto pt-12 pb-12'>
-        <h1 className='text-3xl pb-4'>Blog Posts</h1>
-          <ul className={viewerClass}>
-            {posts.map(post => (
-              <Link to={`.${post.fields.slug}`} itemProp="url" className="w-full">
-                <Post
-                  title={post.frontmatter.title}
-                  description={post.frontmatter.description}
-                  date={post.frontmatter.date}
-                  key={post.fields.slug}
-                  tags={post.frontmatter.tags}
-                  className="mb-4"
-                />
-              </Link>
-            ))}  
-          </ul>
+        <div>
+          <h1 className='text-3xl pb-4'>Blog Posts</h1>
+        </div>
+        <ul className={viewerClass}>
+          {posts.map(post => (
+            <Link to={`../posts${post.fields.slug}`} itemProp="url" className="w-full" key={post.fields.slug} >
+              <Post
+                title={post.frontmatter.title}
+                description={post.frontmatter.description}
+                date={post.frontmatter.date}
+                key={post.fields.slug}
+                tags={post.frontmatter.tags}
+                className="mb-4"
+              />
+            </Link>
+          ))}  
+        </ul>
       </div>
     </Layout>
   )
