@@ -29,17 +29,18 @@ class Text {
 
 class Canvas {
   constructor(canvas) {
+    
     this.canvas = canvas
     this.width = canvas.offsetWidth
     this.height = canvas.offsetHeight
 
-    
     this.tick = 100;
 
     this.options = {
       width: this.width,
       height: this.height
     }
+    this.textCtx = new Text(this.canvas, this.options);
 
     this.canvas.width = this.width
     this.canvas.height = this.height
@@ -47,33 +48,28 @@ class Canvas {
 
     this.resize = this.resize.bind(this)
     
-    window.addEventListener('resize', _.debounce(this.resize, 300))
+    window.addEventListener('resize', _.debounce(this.resize, 50))
     this.render = _.throttle(this.render.bind(this), 300);
-    this.start();
-  }
-
-  start () {
-    this.textCtx = new Text(this.canvas, this.options);
     this.render();
-    // this.loop()
   }
 
   resize (e) {
-    const {offsetWidth, offsetHeight} = this.canvas
+    // const {innerWidth, innerHeight} = window;
 
-    this.width = offsetWidth;
-    this.height = offsetHeight
+    // this.width = innerWidth;
+    // this.height = innerHeight
     
-    this.options = {
-      width: offsetWidth,
-      height: offsetHeight
-    }
+    // this.options = {
+    //   width: innerWidth,
+    //   height: innerHeight
+    // }
 
-    this.textCtx.resize(this.options)
+    // this.textCtx.resize(this.options)
+    // this.canvas.scale()
   } 
 
   render () {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.width, this.height)
     this.textCtx.render();
     requestAnimationFrame(this.render)
   }
