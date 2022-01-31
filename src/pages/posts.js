@@ -22,7 +22,7 @@ const Posts = ({location, data}) => {
     <Layout location={location} title={siteTitle}>
       <div className='w-10/12 m-auto pt-12 pb-12'>
         <div>
-          <h1 className='text-3xl pb-4'>Blog Posts</h1>
+          <h1 className='text-3xl pb-4 dark:text-white'>Blog Posts</h1>
         </div>
         <ul className={viewerClass}>
           {posts.map(post => (
