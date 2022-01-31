@@ -107,13 +107,11 @@ html {
 #article-body h5,
 #article-body h6 {
   font-weight: var(--fontWeight-bold);
-  color: var(--color-heading);
 }
 
 #article-body h1 {
   font-weight: var(--fontWeight-bold);
   font-size: var(--fontSize-5);
-  color: var(--color-heading-black);
 }
 
 #article-body h2 {
