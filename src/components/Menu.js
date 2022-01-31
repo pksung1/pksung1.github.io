@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Link } from "gatsby"
 import Hamburger from './Hamburger'
+import DarkModeSwitch from './DarkModeSwitch'
 import classNames from 'classnames'
 
 const MENUS = [
@@ -35,6 +36,7 @@ const Menu = () => {
     <div className='flex items-center'>
         <div className="flex flex-row justify-center items-center gap-4 hidden lg:flex">
           {MENUS.map(({to, display}) => <Link to={to} key={to}>{display}</Link>)}
+          <DarkModeSwitch />
         </div>
         <div className="lg:hidden flex items-center">
           <Hamburger onClick={handleMenuClick} />
