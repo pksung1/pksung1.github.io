@@ -30,7 +30,7 @@ const BlogIndex = ({ data, location }) => {
       <Seo title="All posts" />
       <MainCanvas />
       <div className="pt-screen -mt-8 z-10 relative lg:px-20">
-        <div className="bg-white mx-auto rounded-t-3xl p-8 max-h">
+        <div className="border bg-white dark:bg-gray-900  mx-auto rounded-t-3xl p-8 max-h dark:text-white">
           <h2 className="text-2xl pb-4">Recent Posts</h2>
           <ol className="lg:grid grid-rows-3 grid-cols-2 gap-2">
             {posts.slice(0, 6).map(post => {
@@ -39,7 +39,7 @@ const BlogIndex = ({ data, location }) => {
               return (
                 <li key={post.fields.slug} onClick={() => navigate(`posts${post.fields.slug}`)} className="p-4 transition-shadow border-gray-100 border rounded shadow-sm hover:shadow-lg cursor-pointer">
                   <article
-                    className="post-list-item"
+                    className="post-list-item "
                     itemScope
                     itemType="http://schema.org/Article"
                   >
