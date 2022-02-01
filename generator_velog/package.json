@@ -1,0 +1,18 @@
+{
+  "name": "generator_velog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon src/app.ts"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4",
+    "@types/commander": "^2.12.2"
+  },
+  "dependencies": {
+    "commander": "^9.0.0"
+  }
+}
