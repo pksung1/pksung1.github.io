@@ -1,6 +1,6 @@
 import {program} from 'commander'
-import {getFiles} from './utils';
-import './aws'
+import {getFileInfos, getFileName} from './utils';
+import {createBucket, generateUploadImageFilter, uploadFile} from './aws'
 
 const DEV = true
 
@@ -31,4 +31,32 @@ if (!programOptions.googleKey) {
   console.log(options.dir, options.outDir, options.googleKey)  
 }
 
-getFiles(options.dir)
+async function start () {
+  // S3 bucket 생성하기
+  console.time('S3 bucket 생성하기')
+  await createBucket();
+  console.timeEnd('S3 bucket 생성하기')
+
+  console.time('md, 이미지 파일 분리하기')
+  const findFiles = await getFileInfos(options.dir)
+  console.timeEnd('md, 이미지 파일 분리하기')
+
+  console.time('Upload 이미지 필터 생성')
+  const uploadImageFilter = await generateUploadImageFilter();
+  console.timeEnd('Upload 이미지 필터 생성')
+
+  console.time('올릴 이미지 파일 이름정하기')
+  const uploadFiles = findFiles.img
+    .map(filepath => ({filepath, s3Name: getFileName(options.dir, filepath)}))
+    .filter(uploadImageFilter)
+  console.timeEnd('올릴 이미지 파일 이름정하기')
+  
+  console.log(uploadFiles)
+  uploadFiles.forEach(async ({filepath, s3Name}) => {
+    console.time(`${s3Name} 업로드`)
+    await uploadFile(filepath, s3Name)
+    console.timeEnd(`${s3Name} 업로드`)
+  })
+}
+
+start();

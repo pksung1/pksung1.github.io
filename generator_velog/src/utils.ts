@@ -12,17 +12,23 @@ async function getFiles (dir: string) {
   return result;
 }
 
-const filenameRegex = new RegExp(/[.png|.md]$/)
+interface IFileFindResult {
+  md: string[]
+  img: string[]
+}
 
 /**
  * 
  * @param dir 폴더위치
  * @returns 폴더 위치에서부터 내부 depth로 들어가 찾은 모든 파일들을 filenameRegex 필터링한값
  */
-async function _recursiveFindFiles(dir: string): Promise<string[]> {
+async function _recursiveFindFiles(dir: string): Promise<IFileFindResult> {
   // 폴더의 파일목록을 불러옴
   const files = await fs.readdir(dir, {})
-  let result: string[] = []
+  let result: IFileFindResult = {
+    md: [],
+    img: [],
+  }
   
   // 불러온 파일들 순회
   for (let file of files) {
@@ -35,16 +41,34 @@ async function _recursiveFindFiles(dir: string): Promise<string[]> {
     if (stat.isDirectory()) {
       const childResult = await _recursiveFindFiles(filePath)
       // childResult와 result를 병합한다.
-      result = [...result, ...childResult]
+      result = {
+        md: [...result.md, ...childResult.md],
+        img: [...result.img, ...childResult.img]
+      }
 
       // 파일이름에 .png, .md가 들어가있다면 결과에 경로를 추가한다.
-    } else if (filenameRegex.test(file)) {
-      result.push(filePath)
+    } else if (path.extname(filePath) === '.md') {
+      result.md.push(filePath)
+    } else if (path.extname(filePath) === '.png') {
+      result.img.push(filePath)
     }
   }
   return result;
 }
 
+function getFileName(dir: string, filename: string) {
+  return filename.slice(filename.indexOf(path.basename(dir)), filename.length)
+}
+
+async function getFileInfos(dir: string) {
+  
+  const findFiles = await getFiles(dir)
+
+  return findFiles;
+}
+
 export {
-  getFiles
+  getFiles,
+  getFileName,
+  getFileInfos,
 }
