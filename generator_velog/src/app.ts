@@ -1,6 +1,6 @@
 import {program} from 'commander'
 import {getFiles} from './utils';
-
+import './aws'
 
 const DEV = true
 
