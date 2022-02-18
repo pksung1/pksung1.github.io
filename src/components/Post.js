@@ -16,7 +16,6 @@ const Post = ({title, description, date, tags, className}) => {
       </div>
       <div className='w-48 border-l-2 pl-2'>
         {tags?.map(tag => <Badge text={tag} key={tag} />)}
-        
       </div>
     </div>
   )

@@ -45,6 +45,7 @@ const BlogPostTemplate = ({ data, location }) => {
             listStyle: `none`,
             padding: 0,
           }}
+          className="dark:text-white"
         >
           <li>
             {previous && (
