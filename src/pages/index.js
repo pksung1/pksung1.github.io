@@ -29,7 +29,7 @@ const BlogIndex = ({ data, location }) => {
     <Layout location={location} title={siteTitle}>
       <Seo title="All posts" />
       <MainCanvas />
-      <div className="pt-screen -mt-8 z-10 relative lg:px-20">
+      <div className="-mt-8 z-10 relative lg:px-20">
         <div className="border bg-white dark:bg-gray-900  mx-auto rounded-t-3xl p-8 max-h dark:text-white">
           <h2 className="text-2xl pb-4">Recent Posts</h2>
           <ol className="lg:grid grid-rows-3 grid-cols-2 gap-2">

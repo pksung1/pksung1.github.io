@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 
 const DARKMODE_STORAGE_KEY = 'DARKMODE_STORAGE_KEY'
 const MODE = {
@@ -24,7 +24,7 @@ const DarkModeSwitch = () => {
     setIsDark(!isDark)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mode = localStorage.getItem(DARKMODE_STORAGE_KEY)
     if (mode === MODE.dark) {
       setIsDark(true)

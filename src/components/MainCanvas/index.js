@@ -83,7 +83,7 @@ const MainCanvas = () => {
   }, [canvasRef])
 
   return (
-    <div id="main-canvas" className="flex fixed h-screen w-screen pt-12 top-0 left-0 z-0 items-center justify-center bg-gray-100 dark:bg-gray-900">
+    <div id="main-canvas" className="flex h-screen w-screen pt-12 items-center justify-center bg-gray-100 dark:bg-gray-900">
       <canvas ref={canvasRef} className="w-full h-full"/>
     </div>
   )
