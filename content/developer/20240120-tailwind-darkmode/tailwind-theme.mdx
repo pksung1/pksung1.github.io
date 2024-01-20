@@ -1,0 +1,19 @@
+---
+slug: tailwind-darkmode
+title: tailwind로 다크모드 만들기
+date: 2024-01-21
+tags: ['darkmode', 'tailwind']
+---
+
+tailwindcss에서 수동으로 다크모드 전환을 위해 tailwind.config.js에 아래와 같이 추가한다.
+
+```js
+module.exports = {
+  darkMode: 'class'
+  // ...
+}
+```
+부모 클래스에 dark가 있다면 dark: 로 시작되는 테마가 적용된다.
+
+리액트를 쓰기 때문에 레이아웃이 그려지기전에 dark여부를 결정해아한다.
+
