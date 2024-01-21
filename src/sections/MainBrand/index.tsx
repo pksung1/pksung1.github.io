@@ -1,12 +1,11 @@
-import Text from "@/components/Text"
+import BusinessCard from "@components/BusinessCard";
 import React from "react";
 
 const MainBrand = () => {
 
   return (
-    <section>
-      <Text>I'M SERVICE DEVELOPER</Text>
-      <Text></Text>
+    <section className="w-full flex flex-row items-center py-10">
+      <BusinessCard />
     </section>
   )
 }
