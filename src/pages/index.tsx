@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
 import Navbar from "../layouts/Navbar"
-import Text from "@/components/Text"
+import Text from "@components/Text"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (

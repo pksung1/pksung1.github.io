@@ -17,7 +17,7 @@ const config: GatsbyConfig = {
       resolve: "gatsby-plugin-alias-imports",
       options: {
         alias: {
-          "@": "src"
+          "@components": "src/components"
         },
         extensions: [
           "ts", "tsx"
