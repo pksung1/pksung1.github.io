@@ -3,7 +3,7 @@ import type { GatsbyConfig } from "gatsby";
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `vidilog`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://pksung1.github.io/`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -12,7 +12,8 @@ const config: GatsbyConfig = {
   plugins: [
     "gatsby-plugin-postcss", 
     "gatsby-transformer-remark", 
-    "gatsby-plugin-mdx", 
+    "gatsby-plugin-mdx",
+    "gatsby-plugin-svgr",
     {
       resolve: "gatsby-plugin-alias-imports",
       options: {

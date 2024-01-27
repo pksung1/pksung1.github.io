@@ -5,6 +5,17 @@ import Text from "@components/Text"
 import MainBrand from "src/sections/MainBrand"
 import RandomBlogPosts from "src/sections/RandomBlogPosts"
 import MainKeyword from "src/sections/MainKeyword"
+import SkillGraph from "src/sections/SkillGraph"
+
+export const Head: HeadFC = () => {
+  console.log("HEAD IMPORT")
+  return (
+    <>
+      <title>Home Page</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"></link>
+    </>
+  )
+}
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
@@ -12,9 +23,8 @@ const IndexPage: React.FC<PageProps> = () => {
       <Navbar />
       <MainBrand />
       <MainKeyword />
-      <Text as="p">3가지 키워드</Text>
       <RandomBlogPosts />
-      <Text as="p">블로그 글 (Random)</Text>
+      <SkillGraph />
       <Text as="p">프로젝트 경험(타임라인)</Text>
       <Text as="p">Contact Me</Text>
     </main>
@@ -22,5 +32,3 @@ const IndexPage: React.FC<PageProps> = () => {
 }
 
 export default IndexPage
-
-export const Head: HeadFC = () => <title>Home Page</title>
