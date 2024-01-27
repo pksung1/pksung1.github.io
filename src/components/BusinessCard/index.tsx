@@ -7,7 +7,7 @@ export interface BusinessCardProps {
 const BusinessCard = () => {
 
   return (
-    <div className="w-full h-full relative flex flex-row items-center justify-center">
+    <div className="relative flex flex-row items-center justify-center">
       <div className="relative w-[480px] h-[300px] shadow-sm hover:shadow-xl hover:shadow-gray-50 shadow-gray-500 rounded-lg p-2 transition-all hover:-translate-y-2">
         <div className="w-full h-full border-4 border-dotted rounded-lg border-gray-500"></div>
         <div id="front" className="absolute w-full h-full flex flex-col items-center py-6 px-4 top-0">
