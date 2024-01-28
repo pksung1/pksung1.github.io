@@ -54,7 +54,7 @@ const LineChart = () => {
     const svg = d3.select(ref.current as any);
 
     const xScale = d3.scaleLinear()
-      .domain([0, datas.length])
+      .domain([0, datas.length - 1])
       .range([0, 500]);
 
     const yScale = d3.scaleLinear()
@@ -71,12 +71,13 @@ const LineChart = () => {
       .attr('stroke', 'white')
       .attr('stroke-width', 12)
       .attr('d', line);
-
     // svg아이콘 그리기
   }, []);
 
   return (
-    <svg ref={ref} width={500} height={500} />
+    <svg ref={ref} width={500} height={500}>
+      <path />
+    </svg>
   );
 };
 

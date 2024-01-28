@@ -24,9 +24,10 @@ const IndexPage: React.FC<PageProps> = () => {
       <MainBrand />
       <MainKeyword />
       <RandomBlogPosts />
-      <SkillGraph />
-      <Text as="p">프로젝트 경험(타임라인)</Text>
-      <Text as="p">Contact Me</Text>
+      {/* TODO: 스킬그래프 작업후 보여주기 */}
+      {/* <SkillGraph /> */}
+      {/* <Text as="p">프로젝트 경험(타임라인)</Text>
+      <Text as="p">Contact Me</Text> */}
     </main>
   )
 }
