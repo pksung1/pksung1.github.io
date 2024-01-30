@@ -29,6 +29,7 @@ const config: GatsbyConfig = {
         ]
       },
     },
+    "gatsby-plugin-mdx",
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -43,27 +44,6 @@ const config: GatsbyConfig = {
         "path": `${__dirname}/content`
       },
       __key: "content"
-    },
-    {
-      resolve: "gatsby-plugin-mdx",
-      options: {
-        mdxOptions: {
-          remarkPlugins: [
-            // Add GitHub Flavored Markdown (GFM) support
-            remarkGfm,
-            // To pass options, use a 2-element array with the
-            // configuration in an object in the second element
-            [remarkExternalLinks, { target: false }],
-          ],
-          rehypePlugins: [
-            // Generate heading ids for rehype-autolink-headings
-            rehypeSlug,
-            // To pass options, use a 2-element array with the
-            // configuration in an object in the second element
-            [rehypeAutolinkHeadings, { behavior: `wrap` }],
-          ],
-        }
-      }
     },
   ]
 };
