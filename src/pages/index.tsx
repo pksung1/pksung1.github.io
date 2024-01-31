@@ -6,12 +6,12 @@ import MainBrand from "src/sections/MainBrand"
 import RandomBlogPosts from "src/sections/RandomBlogPosts"
 import MainKeyword from "src/sections/MainKeyword"
 import SkillGraph from "src/sections/SkillGraph"
+import PageLayout from "src/layouts/PageLayout"
 
 export const Head: HeadFC = () => {
-  console.log("HEAD IMPORT")
   return (
     <>
-      <title>Home Page</title>
+      <title>개발 블로그 | vidilog</title>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"></link>
     </>
   )
@@ -19,8 +19,7 @@ export const Head: HeadFC = () => {
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
-    <main>
-      <Navbar />
+    <PageLayout>
       <MainBrand />
       <MainKeyword />
       <RandomBlogPosts />
@@ -28,7 +27,7 @@ const IndexPage: React.FC<PageProps> = () => {
       {/* <SkillGraph /> */}
       {/* <Text as="p">프로젝트 경험(타임라인)</Text>
       <Text as="p">Contact Me</Text> */}
-    </main>
+    </PageLayout>
   )
 }
 
