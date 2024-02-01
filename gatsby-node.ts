@@ -3,11 +3,9 @@ import { CreatePagesArgs } from "gatsby"
 import path from "path";
 
 export interface Page {
+  title: string;
   frontmatter: {
-    slug: string;
-    title: string;
-    date: Date;
-    tags: string[];
+    publishAt?: Date;
   }
   body: string;
   internal: {
@@ -26,33 +24,39 @@ async function createPostPages(args: CreatePagesArgs) {
   const { actions, graphql } = args;
   const { createPage } = actions;
 
-  const result = await graphql<{
-    allMdx: {
-      nodes: Page[];
-    }
-  }>(`
-  query {
-    allMdx {
+  const result = await graphql<Queries.MarkdownPagesQuery>(`
+  query MarkdownPages {
+    allMarkdownRemark {
       nodes {
         frontmatter {
           slug
           title
-          date
-          tags
+          publishAt
         }
-        body
-        internal {
-          contentFilePath
-        }
+        rawMarkdownBody
+        fileAbsolutePath
       }
     }
   }`)
-  result.data?.allMdx?.nodes.forEach((node) => {
+  result.data?.allMarkdownRemark?.nodes.forEach((node) => {
+
+    if (!node.frontmatter?.slug) {
+      console.log(`Skip Created: ${node.fileAbsolutePath}`)
+      return;
+    }
+
+    console.log(`Created: ${convertToSlug(node.fileAbsolutePath!)}`)
+
     createPage({
-      path: path.join('posts', node.frontmatter.slug),
-      component: `${path.resolve("./src/templates/blog-post.tsx")}?__contentFilePath=${node.internal.contentFilePath}`,
+      path: `posts/${convertToSlug(node.fileAbsolutePath!)}`,
+      component: `${path.resolve("./src/templates/blog-post.tsx")}?__contentFilePath=${node.fileAbsolutePath}`,
       context: {
-        page: node
+        page: {
+          title: path.parse(node.fileAbsolutePath!).name,
+          frontmatter: node.frontmatter,
+          body: node.rawMarkdownBody,
+          internal: node.fileAbsolutePath
+        }
       }
     })
   });
@@ -60,4 +64,8 @@ async function createPostPages(args: CreatePagesArgs) {
 
 function createObsidianPage(args: CreatePagesArgs) {
   
+}
+
+function convertToSlug(text: string) {
+  return path.parse(text).name.toLowerCase().replace(/ /g,'-');
 }

@@ -1,12 +1,9 @@
 import * as React from "react"
 import type { HeadFC, PageProps } from "gatsby"
-import Navbar from "../layouts/Navbar"
-import Text from "@components/Text"
-import MainBrand from "src/sections/MainBrand"
-import RandomBlogPosts from "src/sections/RandomBlogPosts"
-import MainKeyword from "src/sections/MainKeyword"
-import SkillGraph from "src/sections/SkillGraph"
-import PageLayout from "src/layouts/PageLayout"
+import MainBrand from "@app/sections/MainBrand"
+import RandomBlogPosts from "@app/sections/RandomBlogPosts"
+import MainKeyword from "@app/sections/MainKeyword"
+import PageLayout from "@app/layouts/PageLayout"
 
 export const Head: HeadFC = () => {
   return (

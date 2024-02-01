@@ -1,5 +1,6 @@
 ---
 slug: gatsby-library
+publishAt: 2024-02-01T17:30:00
 ---
 
 ## [gatsby-plugin-sharp](https://www.gatsbyjs.com/plugins/gatsby-plugin-sharp/?=gatsby-plugin-sharp)

@@ -1,5 +1,8 @@
 import type { GatsbyConfig } from "gatsby";
-import path from 'path';
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeSlug from "rehype-slug";
+import remarkExternalLinks from "remark-external-links";
+import remarkGfm from "remark-gfm";
 
 const config: GatsbyConfig = {
   siteMetadata: {
@@ -8,34 +11,49 @@ const config: GatsbyConfig = {
   },
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-postcss", 
-    "gatsby-plugin-svgr",
     {
       resolve: "gatsby-plugin-alias-imports",
       options: {
         alias: {
-          "@components": "src/components",
+          "@components": "src-app/components",
           "src": "src",
+          "@app": "src-app"
         },
         extensions: [
-          "ts", "tsx"
+          "ts", "tsx", "js"
         ]
       },
     },
     "gatsby-plugin-sharp",
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: "gatsby-transformer-remark",
       options: {
-        extensions: [".mdx", ".md"],
-        gatsbyRemarkPlugins: [
-          // "gatsby-remark-obsidian-io",
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 1200
-            }
-          },
-        ],
+        gfm: true
+        // gatsbyRemarkPlugins: [
+        //   // "gatsby-remark-obsidian-io",
+        //   {
+        //     resolve: "gatsby-remark-images",
+        //     options: {
+        //       maxWidth: 1200
+        //     }
+        //   },
+        // ],
+        // mdxOptions: {
+        //   remarkPlugins: [
+        //     // Add GitHub Flavored Markdown (GFM) support
+        //     // remarkGfm,
+        //     // // To pass options, use a 2-element array with the
+        //     // // configuration in an object in the second element
+        //     // [remarkExternalLinks, { target: false }],
+        //   ],
+        //   rehypePlugins: [
+        //     // // Generate heading ids for rehype-autolink-headings
+        //     // rehypeSlug,
+        //     // // To pass options, use a 2-element array with the
+        //     // // configuration in an object in the second element
+        //     // [rehypeAutolinkHeadings, { behavior: `wrap` }],
+        //   ],
+        // },
       }
     },
     {
@@ -45,14 +63,16 @@ const config: GatsbyConfig = {
         "path": "./src/pages/"
       },
       __key: "pages"
-    }, {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        "name": "content",
-        "path": `${__dirname}/content`
-      },
-      __key: "content"
-    }, {
+    }, 
+    // {
+    //   resolve: 'gatsby-source-filesystem',
+    //   options: {
+    //     "name": "content",
+    //     "path": `${__dirname}/content`
+    //   },
+    //   __key: "content"
+    // }, 
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "obsidian-content",
@@ -60,6 +80,8 @@ const config: GatsbyConfig = {
       },
       __key: "obsidan"
     },
+    "gatsby-plugin-postcss", 
+    "gatsby-plugin-svgr",
   ]
 };
 
