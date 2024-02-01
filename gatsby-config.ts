@@ -1,21 +1,14 @@
 import type { GatsbyConfig } from "gatsby";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeSlug from "rehype-slug";
-import remarkExternalLinks from "remark-external-links";
-import remarkGfm from "remark-gfm";
+import path from 'path';
 
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `vidilog`,
     siteUrl: `https://pksung1.github.io/`
   },
-  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
-  // If you use VSCode you can also use the GraphQL plugin
-  // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-postcss", 
-    "gatsby-transformer-remark", 
     "gatsby-plugin-svgr",
     {
       resolve: "gatsby-plugin-alias-imports",
@@ -33,14 +26,16 @@ const config: GatsbyConfig = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
+        extensions: [".mdx", ".md"],
         gatsbyRemarkPlugins: [
+          // "gatsby-remark-obsidian-io",
           {
             resolve: "gatsby-remark-images",
             options: {
               maxWidth: 1200
             }
-          }
-        ]
+          },
+        ],
       }
     },
     {
@@ -57,6 +52,13 @@ const config: GatsbyConfig = {
         "path": `${__dirname}/content`
       },
       __key: "content"
+    }, {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        "name": "obsidian-content",
+        "path": `${__dirname}/obsidian-content`
+      },
+      __key: "obsidan"
     },
   ]
 };

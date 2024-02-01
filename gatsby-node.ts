@@ -57,3 +57,7 @@ async function createPostPages(args: CreatePagesArgs) {
     })
   });
 }
+
+function createObsidianPage(args: CreatePagesArgs) {
+  
+}
