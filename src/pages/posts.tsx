@@ -4,7 +4,7 @@ import Text from "@app/components/Text";
 import { filename } from "@app/utils/format";
 import { graphql } from "gatsby";
 
-const Posts = ({ data }: {data: Queries.PostListQueryQuery}) => {
+const Posts = ({ data }: {data: Queries.PostsQuery }) => {
 
   console.log(data);
   return (
@@ -24,19 +24,23 @@ const Posts = ({ data }: {data: Queries.PostListQueryQuery}) => {
 export default Posts
 
 export const query = graphql`
-  query PostListQuery {
-    allMarkdownRemark {
-      edges {
+  query Posts {
+    allMarkdownRemark(sort: {
+      frontmatter:{
+        publishAt: ASC
+      }
+    }, limit: 3) {
+      edges{
         node {
-          id
           frontmatter {
             title
+            slug
+            publishAt
           }
-          excerpt
-          timeToRead
           fileAbsolutePath
         }
       }
     }
   }
+
 `

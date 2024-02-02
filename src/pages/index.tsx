@@ -1,9 +1,11 @@
 import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import { graphql, type HeadFC, type PageProps } from "gatsby"
 import MainBrand from "@app/sections/MainBrand"
-import RandomBlogPosts from "@app/sections/RandomBlogPosts"
+import RandomBlogPosts, { Post } from "@app/sections/RandomBlogPosts"
 import MainKeyword from "@app/sections/MainKeyword"
 import PageLayout from "@app/layouts/PageLayout"
+import dayjs from "dayjs"
+import { getTitle } from "@app/utils/format"
 
 export const Head: HeadFC = () => {
   return (
@@ -14,12 +16,21 @@ export const Head: HeadFC = () => {
   )
 }
 
-const IndexPage: React.FC<PageProps> = () => {
+const IndexPage = ({ data }: {data: Queries.RecentlyPostsQuery}) => {
+
+  const posts: Post[] = data.allMarkdownRemark.edges.map(({ node }) => ({
+    title: getTitle(node.fileAbsolutePath!),
+    slug: node.frontmatter?.slug,
+    description: "",
+    thumbnail: "",
+    publishAt: dayjs(node.frontmatter?.publishAt) ?? null,
+    tags: [],
+  }))
+
+  console.log(posts);
   return (
     <PageLayout>
-      <MainBrand />
-      <MainKeyword />
-      <RandomBlogPosts />
+      <RandomBlogPosts posts={posts} />
       {/* TODO: 스킬그래프 작업후 보여주기 */}
       {/* <SkillGraph /> */}
       {/* <Text as="p">프로젝트 경험(타임라인)</Text>
@@ -27,5 +38,28 @@ const IndexPage: React.FC<PageProps> = () => {
     </PageLayout>
   )
 }
+
+
+export const query = graphql`
+  query RecentlyPosts {
+    allMarkdownRemark(sort: {
+      frontmatter:{
+        publishAt: ASC
+      }
+    }, limit: 3) {
+      edges{
+        node {
+          frontmatter {
+            title
+            slug
+            publishAt
+          }
+          fileAbsolutePath
+        }
+      }
+    }
+  }
+
+`
 
 export default IndexPage

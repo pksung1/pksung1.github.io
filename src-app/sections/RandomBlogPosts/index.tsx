@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import Text from "@components/Text"
+import { Dayjs } from "dayjs";
 
 const posts  = [
   {
@@ -22,7 +23,15 @@ const posts  = [
   },
 ]
 
-const RandomBlogPosts = () => {
+export interface Post {
+  title?: string | null;
+  thumbnail?: string | null;
+  description?: string | null;
+  publishAt?: Dayjs | null;
+  tags?: string[] | null;
+}
+
+const RandomBlogPosts = ({posts} : { posts: Post[] }) => {
 
   return (
     <div className="py-10 justify-center flex flex-col">
@@ -37,17 +46,13 @@ const RandomBlogPosts = () => {
 }
 
 
-interface PostCardProps {
-  title?: string;
-  thumbnail?: string;
-  description?: string;
-  tags?: string[];
-}
+interface PostCardProps extends Post {}
+
 const PostCard = ({ title, thumbnail, description, tags }: PostCardProps) => {
 
   return (
     <div className="border border-white w-[250px] rounded-md flex flex-col">
-      <div className="h-[160px] bg-white">{thumbnail}</div>
+      <div className="h-[160px] dark:bg-gray">{thumbnail}</div>
       <div className="p-2 bg-gray-900 rounded-bl-lg rounded-br-lg flex-1">
         <Text as="h3" className="text-lg font-bold mb-1">{sliceText(title ?? "", 27)}</Text>
         <Text as="p">{sliceText(description ?? "", 32) }</Text>
