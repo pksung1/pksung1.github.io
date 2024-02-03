@@ -1,4 +1,3 @@
-import { Page } from "gatsby-node"
 import React from "react"
 import Text from "@components/Text"
 import CodeBlock from "@components/CodeBlock";
@@ -20,7 +19,7 @@ const components: Options['components'] = {
   table: (props: any) => <table className="table-auto dark:text-white dark:border-white" {...props} />,
 }
 
-export const Head = ({ pageContext }: { pageContext: { page: Page } }) => {
+export const Head = ({ pageContext }: { pageContext: { page: Post } }) => {
   return (
     <>
       <title>{pageContext.page.title} | vidilog</title>
@@ -29,7 +28,7 @@ export const Head = ({ pageContext }: { pageContext: { page: Page } }) => {
 
 }
 
-const BlogPost = ({ pageContext }: { pageContext: { page: Page } }) => {
+const BlogPost = ({ pageContext }: { pageContext: { page: Post } }) => {
   return (
     <PageLayout>
       <div className="p-4 outline outline-white rounded-lg box-border">

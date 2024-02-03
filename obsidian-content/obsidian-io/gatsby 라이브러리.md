@@ -1,5 +1,4 @@
 ---
-slug: gatsby-library
 publishAt: 2024-02-01T17:30:00
 ---
 

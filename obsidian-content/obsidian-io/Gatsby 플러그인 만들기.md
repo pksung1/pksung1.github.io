@@ -1,6 +1,3 @@
----
-slug: gatsby-plugin-for-obsidian-io
----
 
 
 

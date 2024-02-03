@@ -2,20 +2,22 @@ import PageLayout from "@app/layouts/PageLayout";
 import React from "react";
 import Text from "@app/components/Text";
 import { filename } from "@app/utils/format";
-import { graphql } from "gatsby";
+import { Link, graphql } from "gatsby";
 
-const Posts = ({ data }: {data: Queries.PostsQuery }) => {
+const Posts = ({ data, pageContext, ...props }: {data: Queries.PostsQuery, pageContext: { page: Post } }) => {
 
-  console.log(data);
   return (
     <PageLayout>
       <Text className="text-xl font-bold">Post List</Text>
       <ul>
-        {data.allMarkdownRemark.edges.map(({ node }) => (
-          <li>
-            <Text>{filename(node.fileAbsolutePath!)}</Text>
+        {data.allMarkdownRemark.edges.map(({ node }) => {
+        return(
+          <li key={node.fileAbsolutePath}>
+            <Link to={node.frontmatter?.slug!}>
+              <Text>{filename(node.fileAbsolutePath!)}</Text>
+            </Link>
           </li>
-        ))}
+        )})}
       </ul>
     </PageLayout>
   )
@@ -29,7 +31,7 @@ export const query = graphql`
       frontmatter:{
         publishAt: ASC
       }
-    }, limit: 3) {
+    }) {
       edges{
         node {
           frontmatter {

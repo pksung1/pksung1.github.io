@@ -2,17 +2,6 @@
 import { CreatePagesArgs } from "gatsby"
 import path from "path";
 
-export interface Page {
-  title: string;
-  frontmatter: {
-    publishAt?: Date;
-  }
-  body: string;
-  internal: {
-    contentFilePath: string;
-  }
-}
-
 exports.createPages = async (args: CreatePagesArgs) => {
   
   await createPostPages(args);
@@ -39,12 +28,6 @@ async function createPostPages(args: CreatePagesArgs) {
     }
   }`)
   result.data?.allMarkdownRemark?.nodes.forEach((node) => {
-
-    if (!node.frontmatter?.slug) {
-      console.log(`Skip Created: ${node.fileAbsolutePath}`)
-      return;
-    }
-
     console.log(`Created: ${convertToSlug(node.fileAbsolutePath!)}`)
 
     createPage({
