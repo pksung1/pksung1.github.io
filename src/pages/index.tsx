@@ -5,7 +5,7 @@ import RandomBlogPosts, { Post } from "@app/sections/RandomBlogPosts"
 import MainKeyword from "@app/sections/MainKeyword"
 import PageLayout from "@app/layouts/PageLayout"
 import dayjs from "dayjs"
-import { getTitle } from "@app/utils/format"
+import { getPostSlug, getTitle } from "@app/utils/format"
 
 export const Head: HeadFC = () => {
   return (
@@ -20,14 +20,12 @@ const IndexPage = ({ data }: {data: Queries.RecentlyPostsQuery}) => {
 
   const posts: Post[] = data.allMarkdownRemark.edges.map(({ node }) => ({
     title: getTitle(node.fileAbsolutePath!),
-    slug: node.frontmatter?.slug,
-    description: "",
+    slug: getPostSlug(node.fileAbsolutePath!),
+    description: "<<설명을 넣어야되요>>",
     thumbnail: "",
     publishAt: dayjs(node.frontmatter?.publishAt) ?? null,
     tags: [],
   }))
-
-  console.log(posts);
   return (
     <PageLayout>
       <RandomBlogPosts posts={posts} />
@@ -50,8 +48,6 @@ export const query = graphql`
       edges{
         node {
           frontmatter {
-            title
-            slug
             publishAt
           }
           fileAbsolutePath

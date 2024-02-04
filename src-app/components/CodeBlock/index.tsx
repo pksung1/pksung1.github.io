@@ -6,7 +6,7 @@ export default (props: any) => {
     const matches = className.match(/language-(?<lang>.*)/)
 
   return (
-    <Highlight code={props.children.props.children.trim()} language={
+    <Highlight code={props.children.props.children} language={
         matches && matches.groups && matches.groups.lang
           ? matches.groups.lang
           : ''

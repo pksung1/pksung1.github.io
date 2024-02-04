@@ -1,5 +1,5 @@
 
-import { CreatePagesArgs } from "gatsby"
+import { CreatePagesArgs, CreateResolversArgs } from "gatsby"
 import path from "path";
 
 exports.createPages = async (args: CreatePagesArgs) => {
@@ -28,7 +28,6 @@ async function createPostPages(args: CreatePagesArgs) {
     }
   }`)
   result.data?.allMarkdownRemark?.nodes.forEach((node) => {
-    console.log(`Created: ${convertToSlug(node.fileAbsolutePath!)}`)
 
     createPage({
       path: `posts/${convertToSlug(node.fileAbsolutePath!)}`,
@@ -43,10 +42,6 @@ async function createPostPages(args: CreatePagesArgs) {
       }
     })
   });
-}
-
-function createObsidianPage(args: CreatePagesArgs) {
-  
 }
 
 function convertToSlug(text: string) {

@@ -60,7 +60,8 @@ const config: GatsbyConfig = {
       resolve: 'gatsby-source-filesystem',
       options: {
         "name": "pages",
-        "path": "./src/pages/"
+        "path": "./src/pages/",
+        ignore: [`**/\.*`], // ignore files starting with a dot
       },
       __key: "pages"
     }, 

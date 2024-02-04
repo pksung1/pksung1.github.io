@@ -1,7 +1,7 @@
 import PageLayout from "@app/layouts/PageLayout";
 import React from "react";
 import Text from "@app/components/Text";
-import { filename } from "@app/utils/format";
+import { filename, getPostSlug } from "@app/utils/format";
 import { Link, graphql } from "gatsby";
 
 const Posts = ({ data, pageContext, ...props }: {data: Queries.PostsQuery, pageContext: { page: Post } }) => {
@@ -9,11 +9,11 @@ const Posts = ({ data, pageContext, ...props }: {data: Queries.PostsQuery, pageC
   return (
     <PageLayout>
       <Text className="text-xl font-bold">Post List</Text>
-      <ul>
+      <ul className="flex flex-col gap-2">
         {data.allMarkdownRemark.edges.map(({ node }) => {
         return(
-          <li key={node.fileAbsolutePath}>
-            <Link to={node.frontmatter?.slug!}>
+          <li key={node.fileAbsolutePath} className="p-2 border border-white rounded-lg">
+            <Link to={getPostSlug(node.fileAbsolutePath!)}>
               <Text>{filename(node.fileAbsolutePath!)}</Text>
             </Link>
           </li>

@@ -9,14 +9,17 @@ import remarkGfm from "remark-gfm";
 const components: Options['components'] = {
   h1: (props: any) => <Text as="h2" className="text-2xl mt-6 mb-4 font-semibold" {...props} />,
   h2: (props: any) => <Text as="h2" className="text-xl mt-2 mb-3 font-bold" {...props} />,
-  h3: (props: any) => <Text as="h3" className="text-lg mb-3" {...props} />,
-  h4: (props: any) => <Text as="h4" className="text-md mb-3" {...props} />,
-  h5: (props: any) => <Text as="h5" className="text-md mb-3" {...props} />,
+  h3: (props: any) => <Text as="h3" className="text-lg mb-3 font-bold" {...props} />,
+  h4: (props: any) => <Text as="h4" className="text-md mb-3 font-bold" {...props} />,
+  h5: (props: any) => <Text as="h5" className="text-md mb-3 font-bold" {...props} />,
   h6: (props: any) => <Text as="h6" className="mb-3" {...props} />,
-  p: (props: any) => <Text as="p" className="mb-1" {...props} />,
+  p: (props: any) => <Text as="p" className="mb-1 font-light leading-6" {...props} />,
   a: (props: any) => <Text as="a" className="mb-1" {...props} />,
   pre: (props: any) => <CodeBlock as="pre" className="" {...props} />,
   table: (props: any) => <table className="table-auto dark:text-white dark:border-white" {...props} />,
+  ul: (props: any) => <ul className="p-2" {...props} />,
+  ol: (props: any) => <ol className="p-2" {...props} />,
+  li: (props: any) => <li className="list-disc ml-4 dark:text-white mb-2" {...props} />,
 }
 
 export const Head = ({ pageContext }: { pageContext: { page: Post } }) => {
