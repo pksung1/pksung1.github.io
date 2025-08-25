@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import BlogPostCard from '../../components/BlogPostCard.astro';
+import Pagination from '../../components/Pagination.astro';
+import type { GetStaticPathsResult } from 'astro';
+
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  const POSTS_PER_PAGE = 6;
+  
+  // Get all blog posts
+  const allPosts = await getCollection('blog');
+  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  
+  // Calculate total pages
+  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+  
+  // Generate pages
+  return Array.from({ length: totalPages }).map((_, i) => {
+    const pageNum = i + 1;
+    const start = i * POSTS_PER_PAGE;
+    const end = start + POSTS_PER_PAGE;
+    
+    return {
+      params: { page: pageNum.toString() },
+      props: { 
+        posts: sortedPosts.slice(start, end),
+        currentPage: pageNum,
+        totalPages,
+      },
+    };
+  }).filter(page => page.params.page !== '1'); // Filter out page 1 as it's handled by index.astro
+}
+
+const { posts, currentPage, totalPages } = Astro.props;
+---
+
+<Layout title={`Blog Posts - Page ${currentPage}`} description={`Browse all blog posts - Page ${currentPage} of ${totalPages}`}>
+  <div class="max-w-4xl mx-auto">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900 mb-2">Blog Posts</h1>
+      <p class="text-gray-600">Page {currentPage} of {totalPages}</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      {posts.map((post) => (
+        <BlogPostCard
+          title={post.data.title}
+          description={post.data.description}
+          pubDate={post.data.pubDate}
+          url={`/blog/${post.slug}`}
+          tags={post.data.tags}
+        />
+      ))}
+    </div>
+
+    <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/blog" />
+  </div>
+</Layout>
