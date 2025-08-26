@@ -24,8 +24,12 @@ jobs:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
         with:
-          submodules: true
+          submodules: recursive
           token: ${{ secrets.PAT_TOKEN }}
+      
+      - name: Update submodules to latest
+        run: |
+          git submodule update --remote --recursive
 
       - name: Install, build, and upload your site
         uses: withastro/action@v3
