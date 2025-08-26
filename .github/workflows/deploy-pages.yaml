@@ -6,7 +6,8 @@ on:
   push:
     branches: [ main ]
   repository_dispatch:
-    types: [post-publish]
+    types:
+      - publish-post
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
