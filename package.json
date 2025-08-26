@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "predev": "git submodule update --remote --merge",
+    "prebuild": "git submodule update --remote --merge"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",
