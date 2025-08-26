@@ -16,6 +16,9 @@ const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pu
 const totalPosts = sortedPosts.length;
 const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
+
+
+console.log(paginatedPosts.map(post => post.slug));
 ---
 
 <Layout title="Blog Posts" description="Browse all blog posts">
@@ -31,7 +34,7 @@ const paginatedPosts = sortedPosts.slice(0, POSTS_PER_PAGE);
           title={post.data.title}
           description={post.data.description}
           pubDate={post.data.pubDate}
-          url={`/blog/${post.slug}`}
+          url={`/blog/${post.id}`}
           tags={post.data.tags}
         />
       ))}
