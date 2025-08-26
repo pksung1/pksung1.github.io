@@ -22,5 +22,21 @@ export default defineConfig({
     })
   ],
 
+
+  markdown: {
+    // Shiki 구문 강조 설정
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true
+    },
+    
+    // 또는 Prism 사용
+    // syntaxHighlight: 'prism',
+    
+    // rehype/remark 플러그인
+    remarkPlugins: [],
+    rehypePlugins: []
+  },
+
   site: 'https://pksung1.github.io',
 });

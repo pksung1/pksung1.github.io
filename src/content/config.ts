@@ -1,18 +1,17 @@
 import { glob } from 'astro/loaders';
 import { defineCollection, z } from 'astro:content';
 
-import path from 'path';
 
-const blogPath = path.join(import.meta.dirname, 'blog');
+const blogPath = 'src/content/blog';
 
 const blogCollection = defineCollection({
   loader: glob({ pattern: [
-    `${blogPath}/**/*.md`,
-    `!${blogPath}/_*/**`,
-    `!${blogPath}/.git/**`,
-    `!${blogPath}/node_modules/**`,
-    `!${blogPath}/.obsidian/**`,
-  ] }),
+    `**/*.md`,
+    `!_*/**`,
+    `!.git/**`,
+    `!node_modules/**`,
+    `!.obsidian/**`,
+  ], base: blogPath }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
