@@ -27,9 +27,9 @@ jobs:
           submodules: recursive
           token: ${{ secrets.PAT_TOKEN }}
       
-      - name: Update submodules to latest
+      - name: clone content/blog
         run: |
-          git submodule update --remote --recursive
+          git clone https://github.com/pksung1/obsidian-content.git content/obsidian-content
 
       - name: Install, build, and upload your site
         uses: withastro/action@v3

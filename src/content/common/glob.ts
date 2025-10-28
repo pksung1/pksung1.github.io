@@ -1,5 +1,5 @@
 import { glob } from 'glob';
-import { open, } from 'fs/promises';
+import { open, readFile } from 'fs/promises';
 import fm from 'front-matter'
 import path from 'path';
 
@@ -13,13 +13,14 @@ interface Content {
   path: string;
   title: string;
   meta: Meta;
+  body: string;
 }
 
 /**
  * 블로그 컨텐츠를 로드합니다. is_published가 true인 것만 로드합니다
  * @param path 
  */
-export const contentLoader = async (pattern: string) => {
+export const contentLoader = async (pattern: string): Promise<Content[]> => {
 
   const contentPaths = await glob(pattern);
 
@@ -33,7 +34,17 @@ export const contentLoader = async (pattern: string) => {
     };
   }))
 
-  return contents.filter((content) => content.meta?.is_published) as Content[];
+  return await Promise.all(contents.filter((content) => content.meta?.is_published).map(async (content: Content) => {
+    
+    return {
+      ...content,
+      body: await getContent(content.path),
+    }
+  }));
+}
+
+const getContent = async (path: string) => {
+  return fm(await readFile(path, 'utf-8')).body;
 }
 
 const getFrontMatter = async (path: string) => {

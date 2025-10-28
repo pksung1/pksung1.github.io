@@ -8,13 +8,13 @@ interface GlobLoaderOptions {
 export const globLoader = ({ pattern }: GlobLoaderOptions): Loader => {
   return {
     name: 'vidi-glob-loader',
-    load: async ({ collection, store, parseData, logger }: LoaderContext) => {
+    load: async ({ collection, store, parseData, logger, generateDigest, renderMarkdown}: LoaderContext) => {
 
       store.clear();
       const contents = await contentLoader(pattern);
 
       for (const content of contents) {
-        const id = `${collection}/${content.meta.slug}`;
+        const id = content.meta.slug;
         const parsedContent = await parseData({
           id,
           data: {
@@ -24,9 +24,13 @@ export const globLoader = ({ pattern }: GlobLoaderOptions): Loader => {
           filePath: content.path,
         });
 
+        const digest = generateDigest(parsedContent);
+
         store.set({
           id,
           data: parsedContent,
+          rendered: await renderMarkdown(content.body),
+          digest,
         });
       }
 
