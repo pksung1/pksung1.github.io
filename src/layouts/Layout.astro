@@ -25,9 +25,9 @@ const {
 		<meta name="description" content={description} />
 		<title>{title}</title>
 	</head>
-	<body class="min-h-screen bg-gray-50 flex flex-col">
+	<body class="min-h-screen bg-gray-50 flex flex-col relative">
 		<Header />
-		<main class="">
+		<main class="pt-[var(--header-height)]">
 			<slot />
 		</main>
 		<Footer />

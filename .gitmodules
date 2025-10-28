@@ -1,4 +1,0 @@
-[submodule "src/content/blog"]
-	path = src/content/blog
-	url = git@github.com:pksung1/obsidian-content.git
-	branch = main

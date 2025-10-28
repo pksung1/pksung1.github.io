@@ -1,20 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getBlogPosts } from '../../content/blog/query';
 import BlogPostCard from '../../components/BlogPostCard.astro';
 import Pagination from '../../components/Pagination.astro';
 import type { GetStaticPathsResult } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  posts: CollectionEntry<'blog'>[];
+}
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const POSTS_PER_PAGE = 6;
-  
-  // Get all blog posts
-  const allPosts = await getCollection('blog');
-  const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-  
-  // Calculate total pages
-  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
-  
+  const allPosts = await getBlogPosts();
+  const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+
   // Generate pages
   return Array.from({ length: totalPages }).map((_, i) => {
     const pageNum = i + 1;
@@ -24,12 +26,12 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
     return {
       params: { page: pageNum.toString() },
       props: { 
-        posts: sortedPosts.slice(start, end),
+        posts: allPosts.slice(start, end),
         currentPage: pageNum,
         totalPages,
       },
     };
-  }).filter(page => page.params.page !== '1'); // Filter out page 1 as it's handled by index.astro
+  })
 }
 
 const { posts, currentPage, totalPages } = Astro.props;
@@ -47,8 +49,8 @@ const { posts, currentPage, totalPages } = Astro.props;
         <BlogPostCard
           title={post.data.title}
           description={post.data.description}
-          pubDate={post.data.pubDate}
-          url={`/blog/${post.slug}`}
+          publishedDate={post.data.published_date}
+          url={`/blog/${post.data.slug}`}
           tags={post.data.tags}
         />
       ))}
