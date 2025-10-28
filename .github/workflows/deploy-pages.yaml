@@ -29,7 +29,7 @@ jobs:
       
       - name: clone content/blog
         run: |
-          git clone https://github.com/pksung1/obsidian-content.git content/obsidian-content
+           git clone https://${{ secrets.PAT_TOKEN }}@github.com/pksung1/obsidian-content.git content/obsidian-content
 
       - name: Install, build, and upload your site
         uses: withastro/action@v3
