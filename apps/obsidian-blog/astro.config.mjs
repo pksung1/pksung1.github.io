@@ -3,25 +3,13 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
+import { ObsidianRemarkPlugin } from './src/lib/obsidian-remark-plugin';
 
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  
-  integrations: [
-    mdx({
-      syntaxHighlight: 'shiki',
-      shikiConfig: {
-        theme: 'github-dark',
-        wrap: true
-      },
-      remarkPlugins: [],
-      rehypePlugins: []
-    })
-  ],
-
 
   markdown: {
     // Shiki 구문 강조 설정
@@ -34,7 +22,7 @@ export default defineConfig({
     // syntaxHighlight: 'prism',
     
     // rehype/remark 플러그인
-    remarkPlugins: [],
+    remarkPlugins: [ObsidianRemarkPlugin],
     rehypePlugins: []
   },
 
