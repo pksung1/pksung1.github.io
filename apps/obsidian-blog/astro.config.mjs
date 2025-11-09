@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
 import tailwindcss from '@tailwindcss/vite';
 import { ObsidianRemarkPlugin } from '@pksung1/micromark-extension-ofm';
+import mermaid from 'astro-mermaid';
 
 
 // https://astro.build/config
@@ -49,6 +50,12 @@ export default defineConfig({
     ],
     rehypePlugins: []
   },
+  integrations: [
+    mermaid({
+      theme: 'forest',
+      autoTheme: true
+    })
+  ],
 
   site: 'https://pksung1.github.io',
 });

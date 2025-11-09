@@ -44,7 +44,7 @@ const { posts, currentPage, totalPages } = Astro.props;
       <p class="text-gray-600">Page {currentPage} of {totalPages}</p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-8 mb-12">
       {posts.map((post) => (
         <BlogPostCard
           title={post.data.title}

@@ -1,11 +1,11 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 
-import BlogPostLayout from '../../layouts/BlogPostLayout.astro';
+import BlogPostLayout from '@/layouts/BlogPostLayout.astro';
 
 import type { GetStaticPathsResult } from 'astro';
-import '../../styles/blog.css';
-import { getBlogPosts } from '../../content/blog/query';
+import '@/styles/blog.css';
+import { getBlogPosts } from '@/content/blog/query';
 
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {

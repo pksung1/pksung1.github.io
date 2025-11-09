@@ -1,4 +1,12 @@
 {
   "name": "obsidian-blog-monorepo",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "pnpm --filter obsidian-blog build",
+    "dev": "pnpm --filter obsidian-blog dev"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }
