@@ -1,0 +1,20 @@
+{
+  "name": "@pksung1/micromark-extension-ofm",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "tsx test"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.0",
+    "mdast-util-from-markdown": "^2.0.2",
+    "micromark": "^4.0.2",
+    "micromark-util-symbol": "^2.0.1",
+    "micromark-util-types": "^2.0.2",
+    "tsx": "^4.20.6"
+  }
+}
