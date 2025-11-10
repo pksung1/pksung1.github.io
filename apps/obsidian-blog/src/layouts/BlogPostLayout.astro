@@ -9,8 +9,6 @@ interface Props {
 const { post } = Astro.props;
 const { title, description, published_date, updated_date, tags = [] } = post.data;
 
-console.log(published_date)
-
 
 const formattedPublishedDate = published_date?.toLocaleDateString('en-us', {
   year: 'numeric',
@@ -26,7 +24,7 @@ const formattedUpdatedDate = updated_date?.toLocaleDateString('en-us', {
 ---
 
 <Layout title={title} description={description}>
-  <article class="max-w-3xl mx-auto">
+  <article class="max-w-3xl mx-auto px-4">
     <div class="mb-8">
       <h1 class="text-4xl font-bold mb-4 text-gray-900 pt-4 pb-2">{title}</h1>
       <p class="text-gray-600 ">{description}</p>

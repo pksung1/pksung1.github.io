@@ -24,12 +24,15 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="min-h-screen bg-gray-50 flex flex-col relative">
+	<body class="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] flex flex-col relative font-notosanskr">
 		<Header />
 		<main class="pt-[var(--header-height)]">
 			<slot />
 		</main>
-		<Footer />
+		<!-- <Footer /> -->
 	</body>
 </html>
