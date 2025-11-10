@@ -1,5 +1,6 @@
 
 import { Application, Text, extensions, ResizePlugin, RenderTexture, Sprite, Container } from 'pixi.js'
+import ParticleText from './particle-text'
 
 export async function init(container: HTMLElement, title: string) {
   extensions.add(ResizePlugin)
@@ -20,41 +21,18 @@ export async function init(container: HTMLElement, title: string) {
     container.appendChild(app.canvas)
   }
 
-  // 텍스트 생성
-  const text = new Text({
-    text: title,
-    style: {
-      fontFamily: 'Arial, sans-serif',
-      fontSize: 48,
-      lineHeight: 48 * 1.5,
-      fill: 0x333333,
-      align: 'center',
-      fontWeight: 'bold'
-    },
-  })
+  const particleText = new ParticleText(title)
+  const particleTextContainer = particleText.build()
 
-  const renderTextureText = RenderTexture.create({
-    width: text.width,
-    height: text.height,
-  })
+  particleTextContainer.x = app.screen.width / 2 - particleTextContainer.width / 2
+  particleTextContainer.y = app.screen.height / 2 - particleTextContainer.height / 2
 
-  app.renderer.render({
-    container: text,
-    target: renderTextureText,
-  })
+  app.stage.addChild(particleTextContainer)
 
-  const textSprite = Sprite.from(renderTextureText)
-
-  textSprite.anchor.set(0.5)
-  textSprite.x = app.screen.width / 2;
-  textSprite.y = app.screen.height / 2;
 
   app.renderer.on('resize', () => {
-    textSprite.x = app.screen.width / 2;
-    textSprite.y = app.screen.height / 2;
+    particleTextContainer.x = app.screen.width / 2 - particleTextContainer.width / 2
+    particleTextContainer.y = app.screen.height / 2 - particleTextContainer.height / 2
   })
-
-  app.stage.addChild(textSprite)
-
 
 }
