@@ -13,7 +13,7 @@ interface Props {
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
-  const POSTS_PER_PAGE = 6;
+  const POSTS_PER_PAGE = 10;
   const allPosts = await getBlogPosts();
   const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
 

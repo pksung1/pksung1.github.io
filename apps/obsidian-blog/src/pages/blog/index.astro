@@ -1,21 +1,46 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getBlogPosts } from '../../content/blog/query';
-import BlogPostCard from '../../components/BlogPostCard.astro';
-import Pagination from '../../components/Pagination.astro';
+import Layout from '@/layouts/Layout.astro';
+import { getBlogPosts, getBlogPostsAllTags } from '@/content/blog/query';
+import { TagFilter } from '@/components/blog/TagFilter';
+import { BlogPostList } from '@/components/blog/BlogPostList';
 
 // Pagination settings
 const POSTS_PER_PAGE = 6;
-const currentPage = 1;
 
-// Get all blog posts sorted by publication date
+// 쿼리스트링에서 태그 읽기
+const url = Astro.url;
+const tagsParam = url.searchParams.get('tags');
+const selectedTags = tagsParam ? tagsParam.split(',').filter(Boolean) : [];
+
+// 모든 포스트 가져오기 (하이드레이션을 위해 모든 데이터 전달)
 const allPosts = await getBlogPosts();
 
-// Calculate pagination
-const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
-const paginatedPosts = allPosts.slice(0, POSTS_PER_PAGE);
+// 모든 태그 가져오기
+const allTags = await getBlogPostsAllTags();
 
+// 클라이언트 사이드 필터링을 위한 포스트 데이터 직렬화
+const postsData = allPosts.map(post => ({
+  id: post.id,
+  title: post.data.title,
+  description: post.data.description || '',
+  publishedDate: post.data.published_date?.toISOString() || null,
+  tags: post.data.tags || [],
+  slug: post.data.slug,
+}));
 
+// 초기 필터링된 포스트 (서버 사이드 렌더링용)
+const initialPosts = selectedTags.length > 0
+  ? postsData.filter(post => 
+      selectedTags.some(tag => post.tags.includes(tag))
+    )
+  : postsData;
+
+// 초기 정렬 (최신순)
+initialPosts.sort((a, b) => {
+  const dateA = a.publishedDate ? new Date(a.publishedDate).getTime() : 0;
+  const dateB = b.publishedDate ? new Date(b.publishedDate).getTime() : 0;
+  return dateB - dateA;
+});
 ---
 
 <Layout title="Blog Posts" description="Browse all blog posts">
@@ -24,21 +49,21 @@ const paginatedPosts = allPosts.slice(0, POSTS_PER_PAGE);
       <h1 class="text-3xl font-bold mb-2">Blog Posts</h1>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-1 gap-2 mb-12">
-      {paginatedPosts.map((post) => (
-        <a href={`/blog/${post.id}`} class="block cursor-pointer hover:opacity-90 transition-opacity">
-          <BlogPostCard
-            title={post.data.title}
-            description={post.data.description}
-            publishedDate={post.data.published_date}
-            tags={post.data.tags}
-          />
-        </a>
-      ))}
+    <!-- 태그 필터 컴포넌트 -->
+    <div class="mb-4">
+      <TagFilter 
+        client:load
+        availableTags={allTags}
+        selectedTags={selectedTags}
+      />
     </div>
 
-    {totalPages > 1 && (
-      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl="/blog" />
-    )}
+    <!-- 블로그 포스트 리스트 (하이드레이션 사용) -->
+    <BlogPostList 
+      client:load
+      initialPosts={postsData}
+      initialSelectedTags={selectedTags}
+      postsPerPage={POSTS_PER_PAGE}
+    />
   </div>
 </Layout>
