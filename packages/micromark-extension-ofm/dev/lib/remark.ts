@@ -42,14 +42,12 @@ export function ObsidianRemarkPlugin(
   const { root = '' } = options
   const data = this.data()
   
-  console.log('ObsidianRemarkPlugin 실행됨', { root, data })
-  
   // micromark extensions 추가
   const micromarkExtensions = (data.micromarkExtensions || []) as any[]
   if (!micromarkExtensions.includes(extension)) {
     micromarkExtensions.push(extension)
     data.micromarkExtensions = micromarkExtensions
-    console.log('micromarkExtensions 설정됨', data.micromarkExtensions)
+    // console.log('micromarkExtensions 설정됨', data.micromarkExtensions)
   }
 
   // mdast extensions 추가 (fromMarkdownExtensions로 설정해야 함)
@@ -57,7 +55,7 @@ export function ObsidianRemarkPlugin(
   const mdastExtension = mdast({ root })
   fromMarkdownExtensions.push(mdastExtension)
   data.fromMarkdownExtensions = fromMarkdownExtensions
-  console.log('fromMarkdownExtensions 설정됨', data.fromMarkdownExtensions)
+  // console.log('fromMarkdownExtensions 설정됨', data.fromMarkdownExtensions)
 }
 
 export default ObsidianRemarkPlugin

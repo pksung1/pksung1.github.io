@@ -6,6 +6,8 @@ import tailwindcss from '@tailwindcss/vite';
 import { ObsidianRemarkPlugin } from '@pksung1/micromark-extension-ofm';
 import mermaid from 'astro-mermaid';
 
+import react from '@astrojs/react';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -54,7 +56,8 @@ export default defineConfig({
     mermaid({
       theme: 'forest',
       autoTheme: true
-    })
+    }),
+    react()
   ],
 
   site: 'https://pksung1.github.io',

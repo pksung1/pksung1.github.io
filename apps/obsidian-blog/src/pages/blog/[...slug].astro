@@ -1,12 +1,16 @@
 ---
 import { render, type CollectionEntry } from 'astro:content';
 
+import Layout from '@/layouts/Layout.astro';
 import BlogPostLayout from '@/layouts/BlogPostLayout.astro';
 
 import type { GetStaticPathsResult } from 'astro';
 import '@/styles/blog.css';
 import { getBlogPosts } from '@/content/blog/query';
 
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
   const blogEntries = await getBlogPosts();
@@ -17,9 +21,12 @@ export async function getStaticPaths(): Promise<GetStaticPathsResult> {
 }
 
 const { entry } = Astro.props;
-const { Content } = await render(entry as CollectionEntry<'blog'>);
+const { Content } = await render(entry);
+
 ---
 
-<BlogPostLayout post={entry as CollectionEntry<'blog'>}>
-  <Content />
-</BlogPostLayout>
+<Layout title={entry.data.title} description={entry.data.description}>
+  <BlogPostLayout post={entry}>
+    <Content />
+  </BlogPostLayout>
+</Layout>

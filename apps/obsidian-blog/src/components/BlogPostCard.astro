@@ -1,13 +1,16 @@
 ---
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './ui/card';
+import { Button } from './ui/button';
+
 interface Props {
   title: string;
   description: string;
   publishedDate: Date;
-  url: string;
   tags?: string[];
+  onClick?: () => void;
 }
 
-const { title, description, publishedDate, url, tags = [] } = Astro.props;
+const { title, description, publishedDate, onClick, tags = [] } = Astro.props;
 const formattedDate = publishedDate?.toLocaleDateString('en-us', {
   year: 'numeric',
   month: 'short',
@@ -15,27 +18,12 @@ const formattedDate = publishedDate?.toLocaleDateString('en-us', {
 });
 ---
 
-<a href={url} class="block">
-  <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-    <div class="p-4">
-      <!-- <div class="flex items-center text-sm text-gray-500 p-0">
-        <time datetime={publishedDate?.toISOString()}>{formattedDate}</time>
-      </div> -->
-      <h2 class="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors duration-200">
-        {title}
-      </h2>
-      <p class="text-gray-600 mb-4 text-sm">{description}</p>
-      
-      {tags.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {tags.map((tag: string) => (
-            <span class="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">
-              {tag}
-            </span>
-          ))}
-        </div>
-      )}
-      
-    </div>
-  </article>
-</a>
+<Card onClick={onClick}>
+  <CardHeader>
+    <CardTitle>{title}</CardTitle>
+    <CardDescription>{description}</CardDescription>
+  </CardHeader>
+  <CardFooter>
+    <Button variant="outline">Read more</Button>
+  </CardFooter>
+</Card>

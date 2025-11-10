@@ -46,13 +46,14 @@ const { posts, currentPage, totalPages } = Astro.props;
 
     <div class="grid grid-cols-1 md:grid-cols-1 gap-8 mb-12">
       {posts.map((post) => (
-        <BlogPostCard
-          title={post.data.title}
-          description={post.data.description}
-          publishedDate={post.data.published_date}
-          url={`/blog/${post.data.slug}`}
-          tags={post.data.tags}
-        />
+        <a href={`/blog/${post.id}`} class="block cursor-pointer hover:opacity-90 transition-opacity">
+          <BlogPostCard
+            title={post.data.title}
+            description={post.data.description}
+            publishedDate={post.data.published_date}
+            tags={post.data.tags}
+          />
+        </a>
       ))}
     </div>
 

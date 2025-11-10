@@ -1,7 +1,26 @@
 ---
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const isRootPage = Astro.url.pathname === '/';
+
+const headerVariants = cva(
+  "top-0 left-0 w-full p-2 border-b border-gray-200 h-[var(--header-height)] bg-background",
+  {
+    variants: {
+      position: {
+        absolute: "absolute",
+        static: "static",
+      },
+    },
+    defaultVariants: {
+      position: "static",
+    },
+  }
+);
 ---
 
-<header class="absolute top-0 left-0 w-full p-2 border-b border-gray-200 h-[var(--header-height)]">
+<header class={cn(headerVariants({ position: isRootPage ? 'absolute' : 'static' }))}>
   <div class="flex flex-row justify-between items-center">
     <div>
       <a href="/" class="text-2xl font-bold">vidi's blog</a>

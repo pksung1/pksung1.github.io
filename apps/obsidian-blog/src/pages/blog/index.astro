@@ -21,18 +21,19 @@ const paginatedPosts = allPosts.slice(0, POSTS_PER_PAGE);
 <Layout title="Blog Posts" description="Browse all blog posts">
   <div class="max-w-4xl mx-auto px-2">
     <header class="my-2">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">Blog Posts</h1>
+      <h1 class="text-3xl font-bold mb-2">Blog Posts</h1>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-1 gap-2 mb-12">
       {paginatedPosts.map((post) => (
-        <BlogPostCard
-          title={post.data.title}
-          description={post.data.description}
-          publishedDate={post.data.published_date}
-          url={`/blog/${post.id}`}
-          tags={post.data.tags}
-        />
+        <a href={`/blog/${post.id}`} class="block cursor-pointer hover:opacity-90 transition-opacity">
+          <BlogPostCard
+            title={post.data.title}
+            description={post.data.description}
+            publishedDate={post.data.published_date}
+            tags={post.data.tags}
+          />
+        </a>
       ))}
     </div>
 

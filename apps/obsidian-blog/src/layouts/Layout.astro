@@ -1,8 +1,6 @@
 ---
 import '@/styles/global.css';
-// import '@/styles/typography.css';
 import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
 
 interface Props {
 	title?: string;
@@ -28,9 +26,28 @@ const {
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
 	</head>
-	<body class="min-h-screen bg-[var(--color-bg)] dark:bg-[var(--color-bg-dark)] text-[var(--color-text)] dark:text-[var(--color-text-dark)] flex flex-col relative font-notosanskr">
+
+	<script is:inline>
+		const getThemePreference = () => {
+			if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+				return localStorage.getItem('theme');
+			}
+			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+		};
+		const isDark = getThemePreference() === 'dark';
+		document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+	
+		if (typeof localStorage !== 'undefined') {
+			const observer = new MutationObserver(() => {
+				const isDark = document.documentElement.classList.contains('dark');
+				localStorage.setItem('theme', isDark ? 'dark' : 'light');
+			});
+			observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+		}
+	</script>
+	<body class="min-h-screen flex flex-col relative font-notosanskr bg-background">
 		<Header />
-		<main class="pt-[var(--header-height)]">
+		<main>
 			<slot />
 		</main>
 		<!-- <Footer /> -->

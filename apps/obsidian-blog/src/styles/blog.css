@@ -1,44 +1,45 @@
+@reference "global.css";
 
 .blog {
   h1 {
-    @apply text-3xl font-bold py-2 text-[var(--color-text)];
+    @apply text-3xl font-bold py-2;
   }
 
   h2 {
-    @apply text-2xl font-bold py-2 text-[var(--color-text)];
+    @apply text-2xl font-bold py-2;
   }
 
   h3 {
-    @apply text-lg font-bold py-2 text-[var(--color-text)];
+    @apply text-lg font-bold py-2;
   }
 
   h4 {
-    @apply text-base font-bold py-2 text-[var(--color-text)];
+    @apply text-base font-bold py-2;
   }
 
   h5 {
-    @apply text-sm font-bold py-2 text-[var(--color-text)];
+    @apply text-sm font-bold py-2;
   }
 
   h6 {
-    @apply text-xs font-bold py-2 text-[var(--color-text)];
+    @apply text-xs font-bold py-2;
   }
 
   p {
-    @apply text-base py-1 leading-5 text-[var(--color-text)];
+    @apply text-base py-8 leading-5;
   }
 
   pre {
-    @apply p-4 rounded-lg text-[var(--color-text)];
+    @apply p-4 rounded-lg;
   }
 
   ul {
-    @apply pl-4 list-disc text-[var(--color-text)];
+    @apply pl-4 list-disc;
 
   }
 
   ol {
-    @apply  pl-4 list-decimal text-[var(--color-text)];
+    @apply  pl-4 list-decimal;
   }
 
   img {
@@ -46,19 +47,19 @@
   }
 
   a {
-    @apply text-[var(--color-link)] hover:text-[var(--color-link-hover)];
+    @apply text-blue-600 hover:text-blue-600;
   }
 
   table {
-    @apply text-[var(--color-text)] border-collapse border border-gray-200 mt-2;
+    @apply border-collapse border border-gray-200 mt-2;
     tr {
-      @apply text-base py-1 leading-5 text-[var(--color-text)] border border-gray-200;
+      @apply text-base py-1 leading-5 border border-gray-200;
     }
     th {
-      @apply text-base py-1 leading-5 text-[var(--color-text)] border border-gray-200 px-2;
+      @apply text-base py-1 leading-5 border border-gray-200 px-2;
     }
     td {
-      @apply text-base py-1 leading-5 text-[var(--color-text)] border border-gray-200 px-2 py-1;
+      @apply text-base py-1 leading-5 border border-gray-200 px-2 py-1;
     }
   }
 }
