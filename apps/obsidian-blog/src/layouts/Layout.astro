@@ -35,7 +35,10 @@ const {
 			return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 		};
 		const isDark = getThemePreference() === 'dark';
+
 		document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
+		document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+		
 	
 		if (typeof localStorage !== 'undefined') {
 			const observer = new MutationObserver(() => {
